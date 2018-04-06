@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Speak Like a Pirate</title>
+</head>
+<body style="background-image:url('https://previews.123rf.com/images/andreykuzmin/andreykuzmin1503/andreykuzmin150300001/37204910-vintage-golden-compass-with-nautical-map-background.jpg')">
+<style>
+    textarea{
+        width: 265px;
+        height: 265px;
+        display: block;
+    	margin-left: auto;
+    	margin-right: auto;
+        background-color: #add8e6;
+    }
+    
+</style>
+<h1 style="font-family:verdana;"> <center>Speak Like a Pirate </center></h1>
+
+<font>
+
+<p1>
+<textarea id = "display1" rows = "12" cols = "25"></textarea>
+
+<div style="text-align:center;">
+<button onclick="Wrapper()"><img src=http://www.dezignwithaz.com/images/glow-skull-bones-decal1.png height="265" width="265"></button>
+</div>
+
+<textarea id = "display2" rows = "12" cols = "25" placeholder="Here be yer translation matey.">
+</textarea>
+
+</p1>
+
+<script>
+	PHRASES = [["hello", "ahoy"], ["hi", "yo-ho-ho"], ["pardon me", "avast"], 
+               ["excuse me", "arrr"], 
+               ["my", "me"], ["friend", "me bucko"], ["sir", "matey"], 
+               ["madam", "proud beauty"], ["miss", "comely wench"], 
+               ["stranger", "scurvy dog"], ["officer", "foul blaggart"], 
+               ["where", "whar"], ["is", "be"], ["the", "th'"], ["you", "ye"],
+               ["tell", "be tellin'"], ["know", "be knowin'"],
+               ["how far", "how many leagues"], ["old", "barnacle-covered"],
+               ["attractive", "comely"], ["happy", "grog-filled"], 
+               ["nearby", "broadside"], ["restroom", "head"], ["restaurant", "galley"],
+               ["hotel", "fleabag inn"], ["pub", "Skull & Scuppers"],
+               ["bank", "buried trasure"]
+              ];
+
+	function Capitalize(str)
+    // Returns: a copy of str with the first letter capitalized
+    {
+        return str.charAt(0).toUpperCase() + str.substring(1);
+    }
+    
+    function Translate(text)
+    // Returns: a copy of text with English phrases replaced by piratey equivalents 
+    {
+        for (var i = 0; i < PHRASES.length; i++) {
+            var toReplace = new RegExp("\\b"+PHRASES[i][0]+"\\b", "i");
+            
+            var index = text.search(toReplace);
+            while (index != -1) {
+               if (text.charAt(index) >= "A" && text.charAt(index) <= "Z") {
+                   text = text.replace(toReplace, Capitalize(PHRASES[i][1]));
+               } 
+               else {
+                   text = text.replace(toReplace, PHRASES[i][1]);
+               }
+               index = text.search(toReplace);
+            }
+        }
+        return text;
+    }
+
+    
+	function Wrapper(){
+		var userText = document.getElementById("display1").value;
+    	var translatedText = Translate(userText);
+        display2.value = translatedText;
+	}
+
+</script>
+
+</body>
+</html>
